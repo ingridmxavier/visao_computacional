@@ -29,3 +29,5 @@ Ao final do processamento, o sistema gera um novo vídeo contendo a identificaç
 <li>OpenCV</li>
 <li>Computer Vision</li>
 </ul>
+
+Site: https://ingridmxavier.github.io/visao_computacional/
