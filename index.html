@@ -1,31 +1,198 @@
-<h2>🚗 Detecção automática de vagas de estacionamento usando Visão Computacional</h2>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Detecção de Vagas com Visão Computacional</title>
+
+<style>
+
+body{
+font-family: Arial, Helvetica, sans-serif;
+margin:0;
+background:#0f172a;
+color:#e2e8f0;
+}
+
+header{
+text-align:center;
+padding:40px;
+background:linear-gradient(90deg,#1e3a8a,#0ea5e9);
+}
+
+header h1{
+margin:0;
+font-size:40px;
+}
+
+header p{
+font-size:18px;
+}
+
+.container{
+max-width:1000px;
+margin:auto;
+padding:40px;
+}
+
+.card{
+background:#1e293b;
+padding:30px;
+border-radius:12px;
+margin-bottom:30px;
+box-shadow:0 0 15px rgba(0,0,0,0.4);
+}
+
+h2{
+color:#38bdf8;
+}
+
+ul{
+line-height:1.8;
+}
+
+.code{
+background:#020617;
+padding:20px;
+border-radius:10px;
+font-family:monospace;
+color:#22c55e;
+}
+
+.upload{
+border:2px dashed #38bdf8;
+padding:30px;
+text-align:center;
+border-radius:12px;
+cursor:pointer;
+transition:0.3s;
+}
+
+.upload:hover{
+background:#1e293b;
+}
+
+video{
+margin-top:20px;
+width:100%;
+border-radius:10px;
+}
+
+footer{
+text-align:center;
+padding:20px;
+color:#94a3b8;
+}
+
+a{
+color:#38bdf8;
+text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>🚗 Detecção de Vagas com Visão Computacional</h1>
+<p>Sistema de identificação automática de vagas livres e ocupadas utilizando OpenCV</p>
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Funcionamento do Algoritmo</h2>
 
 <p>
-Este projeto implementa um sistema capaz de identificar vagas livres e ocupadas em um estacionamento a partir da análise de vídeo utilizando <b>Python</b> e <b>OpenCV</b>.
+O sistema utiliza técnicas de <b>processamento digital de imagens</b> para identificar se as vagas do estacionamento estão ocupadas ou livres.
 </p>
 
-<p>
-O algoritmo realiza o processamento do vídeo <i>frame a frame</i>, aplicando técnicas de processamento digital de imagens para detectar a ocupação das vagas.
-</p>
-
-<h3>Etapas do algoritmo</h3>
+<h3>Etapas do processamento</h3>
 
 <ul>
-<li>Conversão da imagem para escala de cinza</li>
-<li>Aplicação de <b>Gaussian Blur</b> para redução de ruído</li>
-<li>Aplicação de <b>threshold adaptativo</b></li>
-<li>Uso de <b>operações morfológicas</b> para melhorar a segmentação</li>
-<li>Análise de pixels por região de interesse (<b>ROI</b>) correspondente a cada vaga</li>
+<li><b>Conversão para escala de cinza:</b> A imagem RGB é convertida para grayscale para simplificar o processamento.</li>
+
+<li><b>Gaussian Blur:</b> Aplicação de filtro de suavização para redução de ruído.</li>
+
+<li><b>Threshold adaptativo:</b> A imagem é binarizada para destacar objetos como veículos.</li>
+
+<li><b>Dilatação:</b> Operação morfológica utilizada para reforçar regiões detectadas.</li>
+
+<li><b>Análise por região (ROI):</b> Cada vaga é analisada contando a quantidade de pixels brancos.</li>
 </ul>
+
+<h3>Regra de decisão</h3>
+
+<div class="code">
+
+if pixels_brancos &lt; limite:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;vaga = "Livre"<br>
+else:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;vaga = "Ocupada"
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Upload de Vídeo</h2>
+
+<p>Envie um vídeo do estacionamento para visualizar no sistema.</p>
+
+<div class="upload">
+<input type="file" id="videoUpload" accept="video/*">
+</div>
+
+<video id="videoPreview" controls></video>
+
+</div>
+
+<div class="card">
+
+<h2>Referências</h2>
 
 <p>
-Ao final do processamento, o sistema gera um novo vídeo contendo a identificação das vagas de estacionamento, destacando visualmente as vagas livres e ocupadas.
+[1] Reddit. Parking Space Counter Created Using OpenCV and Python.<br>
+<a href="https://www.reddit.com/r/Python/comments/ua6xh2/parking_space_counter_created_using_opencv_and/" target="_blank">
+Reddit Discussion
+</a>
 </p>
 
-<h3>Tecnologias utilizadas</h3>
+<p>
+[2] Computer Vision Zone. Parking Space Counter – Computer Vision Project.<br>
+<a href="https://www.computervision.zone/courses/parking-space-counter/" target="_blank">
+Computer Vision Zone
+</a>
+</p>
 
-<ul>
-<li>Python</li>
-<li>OpenCV</li>
-<li>Computer Vision</li>
-</ul>
+</div>
+
+</div>
+
+<footer>
+Projeto de Visão Computacional • Python + OpenCV
+</footer>
+
+<script>
+
+const upload = document.getElementById("videoUpload");
+const video = document.getElementById("videoPreview");
+
+upload.addEventListener("change", function(){
+
+const file = this.files[0];
+
+if(file){
+const url = URL.createObjectURL(file);
+video.src = url;
+}
+
+});
+
+</script>
+
+</body>
+</html>
